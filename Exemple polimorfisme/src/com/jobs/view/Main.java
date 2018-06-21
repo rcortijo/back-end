@@ -16,15 +16,21 @@ public class Main {
 		controller.createVolunteer("Juan Volunteer", "Dirección molona 4", "614266666",0);
 		controller.createManagerEmployee("Pedro Employee", "Dirección molona 2", "665226666", 80.0);
 		
-		String allEmployees=controller.getAllEmployees();
+		String allEmployees=controller.getAllEmployees2();
                 System.out.println("EMPLOYEES: \n" + allEmployees + " \n");
 		
                 System.out.println("CALCULATING PAYMENTS... \n");
-                controller.payAllEmployeers();
+                controller.payAllEmployeers2();
 		
-                allEmployees=controller.getAllEmployees();
+                allEmployees=controller.getAllEmployees2();
 		System.out.println("EMPLOYEES: \n" + allEmployees + " \n");
 		
+                System.out.println("ELIMINATING 2 EMPLOYEES... \n");
+                controller.deleteEmployee(1);
+                controller.deleteEmployee(2);
+                
+                allEmployees=controller.getAllEmployees2();
+		System.out.println("EMPLOYEES: \n" + allEmployees + " \n");
 	}
 
 }

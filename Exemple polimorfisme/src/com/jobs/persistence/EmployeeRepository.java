@@ -24,6 +24,13 @@ public class EmployeeRepository {
                 }
 		members.add(member);
 	}
+        
+        public void removeMember(AbsStaffMember member) throws Exception{
+                if(member==null) {
+                    throw new Exception();
+                }
+		members.remove(member);
+	}
 	
 	
 }

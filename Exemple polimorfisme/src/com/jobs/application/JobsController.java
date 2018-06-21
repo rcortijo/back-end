@@ -11,52 +11,53 @@ import java.util.List;
 
 public class JobsController {
 
-	private EmployeeRepository repository;
-	
-	public JobsController(){
-		repository = new EmployeeRepository();
-	}
+    private EmployeeRepository repository;
 
-	public void createManagerEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{
-		ManagerEmployee boss = new ManagerEmployee(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateManager());
-                repository.addMember(boss);
-	}
-        public void createBossEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{		
-		BossEmployee boss = new BossEmployee(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateBoss());
-                repository.addMember(boss);
-	}
-        public void createEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{		
-		Employee employee = new Employee(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateEmployee());
-		repository.addMember(employee);
-	}
-         public void createVolunteer(String name, String address, String phone,double salaryPerMonth) throws Exception{
-		Volunteer boss = new Volunteer(name, address, phone,salaryPerMonth);
-		repository.addMember(boss);
-		
-	}
+    public JobsController() {
+        repository = new EmployeeRepository();
+    }
 
-         
-	public void payAllEmployeers() {
-            StringBuilder stb = new StringBuilder();
-            List<AbsStaffMember> listaMembers = repository.getAllMembers();
-            Iterator it = listaMembers.iterator();
-           
-            while(it.hasNext()){
-                AbsStaffMember obj = (AbsStaffMember) it.next();
-                obj.pay();
+    public void createManagerEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception {
+        ManagerEmployee boss = new ManagerEmployee(name, address, phone, salaryPerMonth, PaymentFactory.createPaymentRateManager());
+        repository.addMember(boss);
+    }
+
+    public void createBossEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception {
+        BossEmployee boss = new BossEmployee(name, address, phone, salaryPerMonth, PaymentFactory.createPaymentRateBoss());
+        repository.addMember(boss);
+    }
+
+    public void createEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception {
+        Employee employee = new Employee(name, address, phone, salaryPerMonth, PaymentFactory.createPaymentRateEmployee());
+        repository.addMember(employee);
+    }
+
+    public void createVolunteer(String name, String address, String phone, double salaryPerMonth) throws Exception {
+        Volunteer boss = new Volunteer(name, address, phone, salaryPerMonth);
+        repository.addMember(boss);
+
+    }
+
+    public void payAllEmployeers2() {
+        for(AbsStaffMember staff :repository.getAllMembers()){
+            staff.pay();
+        }        
+    }
+
+    public String getAllEmployees2() {
+        StringBuilder stb = new StringBuilder();
+        for(AbsStaffMember staff :repository.getAllMembers()){
+            stb.append( "Cargo: " + staff.getClass().getName().substring(16) + " Id: " + staff.getId() + ", Name: " + staff.getName() + ", Address: " + staff.getAddress() + ", Phone: " + staff.getPhone() + ", Salary:" + staff.getTotalPaid() + "\n");
+        } 
+        return stb.toString();
+    }
+
+    public void deleteEmployee(int id) throws Exception {
+        for(AbsStaffMember staff :repository.getAllMembers()){
+            if(staff.getId() == id){
+                repository.removeMember(staff);
             }
-	}
-	public String getAllEmployees() {
-                StringBuilder stb = new StringBuilder();
-		List<AbsStaffMember> listaMembers = repository.getAllMembers();
-                Iterator it = listaMembers.iterator();
-                int i=1;
-                while(it.hasNext()){
-                    AbsStaffMember obj = (AbsStaffMember) it.next();
-                    stb.append(i+".- Cargo: "+obj.getClass().getName().substring(16)+" Id: "+obj.getId()+", Name: "+obj.getName()+", Address: "+obj.getAddress()+", Phone: "+obj.getPhone()+", Salary:"+obj.getTotalPaid()+"\n");
-                    i++;
-                }
-		return stb.toString();
-	}
-
+        }
+    }
+  
 }
