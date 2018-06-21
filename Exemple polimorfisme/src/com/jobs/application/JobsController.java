@@ -6,6 +6,7 @@ import com.jobs.domain.Employee;
 import com.jobs.domain.ManagerEmployee;
 import com.jobs.domain.Volunteer;
 import com.jobs.persistence.EmployeeRepository;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,14 +18,16 @@ public class JobsController {
         repository = new EmployeeRepository();
     }
 
-    public void createManagerEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception {
+    public StaffDTO createManagerEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception {
         ManagerEmployee boss = new ManagerEmployee(name, address, phone, salaryPerMonth, PaymentFactory.createPaymentRateManager());
         repository.addMember(boss);
+        return new StaffDTO(boss);
     }
 
-    public void createBossEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception {
+    public StaffDTO createBossEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception {
         BossEmployee boss = new BossEmployee(name, address, phone, salaryPerMonth, PaymentFactory.createPaymentRateBoss());
         repository.addMember(boss);
+        return new StaffDTO(boss);
     }
 
     public void createEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception {
@@ -44,12 +47,13 @@ public class JobsController {
         }        
     }
 
-    public String getAllEmployees2() {
-        StringBuilder stb = new StringBuilder();
+    public List<StaffDTO> getAllEmployees2() {
+        List<StaffDTO> dtos = new ArrayList();
         for(AbsStaffMember staff :repository.getAllMembers()){
-            stb.append( "Cargo: " + staff.getClass().getName().substring(16) + " Id: " + staff.getId() + ", Name: " + staff.getName() + ", Address: " + staff.getAddress() + ", Phone: " + staff.getPhone() + ", Salary:" + staff.getTotalPaid() + "\n");
-        } 
-        return stb.toString();
+            StaffDTO dto = new StaffDTO(staff);
+            dtos.add(dto);
+        }
+        return dtos;
     }
 
     public void deleteEmployee(int id) throws Exception {
