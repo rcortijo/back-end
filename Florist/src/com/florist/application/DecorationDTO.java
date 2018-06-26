@@ -25,8 +25,8 @@ public class DecorationDTO {
     public TypeMaterials getTipoMaterial() {
         return tipoMaterial;
     }
+    public String getDatos(){
+        return "ID: "+getId()+", Price: "+getPrecio()+", Heigth: "+getTipoMaterial();
+    }
 
-   
-   
-    
 }

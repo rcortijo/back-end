@@ -24,5 +24,7 @@ public class TreeDTO {
     public double getHeight() {
         return height;
     }
-    
+    public String getDatos(){
+        return "ID: "+getId()+", Price: "+getPrecio()+", Heigth: "+getHeight();
+    }
 }

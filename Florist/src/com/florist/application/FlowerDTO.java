@@ -24,7 +24,9 @@ public class FlowerDTO {
     public String getColor() {
         return color;
     }
-
+    public String getDatos(){
+        return "ID: "+getId()+", Price: "+getPrecio()+", Heigth: "+getColor();
+    }
    
     
 }

@@ -8,8 +8,6 @@ import com.florist.application.TreeDTO;
 import com.florist.utilities.TypeMaterials;
 import java.util.List;
 
-
-
 public class Main {
 
   public static void main(String[] args) throws Exception {
@@ -35,20 +33,20 @@ public class Main {
         System.out.println("====================================================");
         List<TreeDTO> trees=control.getAllTrees();
         System.out.println("TREES:");
-        for(TreeDTO staff :trees){
-            System.out.println("ID: "+staff.getId()+", Price: "+staff.getPrecio()+", Heigth: "+staff.getHeight());
+        for(TreeDTO tree :trees){
+            System.out.println(tree.getDatos());
         }
         
         List<FlowerDTO> flowers=control.getAllFlowers();
         System.out.println("FLOWERS:");
-        for(FlowerDTO staff :flowers){
-             System.out.println("ID: "+staff.getId()+", Price: "+staff.getPrecio()+", Color: "+staff.getColor());
+        for(FlowerDTO flower :flowers){
+             System.out.println(flower.getDatos());
         }
         
         List<DecorationDTO> decorations=control.getAllDecorations();
         System.out.println("DECORATIONS:");
-        for(DecorationDTO staff :decorations){
-             System.out.println("ID: "+staff.getId()+", Price: "+staff.getPrecio()+", Tipo de Material: "+staff.getTipoMaterial());
+        for(DecorationDTO decoration :decorations){
+             System.out.println(decoration.getDatos());
         }
     }
   
