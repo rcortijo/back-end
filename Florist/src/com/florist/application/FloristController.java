@@ -7,15 +7,15 @@ import com.florist.domain.Decoration;
 import com.florist.domain.Florist;
 import com.florist.domain.Flower;
 import com.florist.domain.Tree;
-import com.florist.repository.ProductRepository;
+import com.florist.utilities.TypeMaterials;
+
 import java.util.ArrayList;
 
 public class FloristController {
     Florist florist;
-    private ProductRepository repository;
+    
 
     public FloristController() {
-        repository = new ProductRepository();
     }
 
   
@@ -23,44 +23,57 @@ public class FloristController {
         florist = new Florist(name);
         return new FloristDTO(florist);
     }
+    
     public TreeDTO addTree(double price, double height) throws Exception {
-        Tree tree = new Tree(price, height);
-        repository.addTree(tree);
+        Tree tree = new Tree(price,height);
+        florist.addProduct(tree);
         return new TreeDTO(tree);
     }
     public FlowerDTO addFlower(double price, String color) throws Exception {
         Flower flower = new Flower(price, color);
-        repository.addFlower(flower);
+        florist.addProduct(flower);
         return new FlowerDTO(flower);
     }
-    public DecorationDTO addDecoration(double price, String tipoMaterial) throws Exception {
+    public DecorationDTO addDecoration(double price, TypeMaterials tipoMaterial) throws Exception {
         Decoration decoration = new Decoration(price, tipoMaterial);
-        repository.addDecoration(decoration);
+        florist.addProduct(decoration);
         return new DecorationDTO(decoration);
     }
   
     
-    public List<TreeDTO> getAllTrees() {
+    public List<TreeDTO> getAllTrees() throws Exception{
         List<TreeDTO> dtos = new ArrayList();
-        for(Tree staff :repository.getAllTrees()){
-            TreeDTO dto = new TreeDTO(staff);
-            dtos.add(dto);
+        for(AbsProduct staff :florist.getProducts()){
+            if(staff instanceof Tree){
+                Tree tree = new Tree(staff.getPrice(),((Tree) staff).getHight());
+                TreeDTO dto = new TreeDTO(tree);
+                dtos.add(dto);
+            }
+            
         }
         return dtos;
     }
-    public List<FlowerDTO> getAllFlowers() {
+    public List<FlowerDTO> getAllFlowers() throws Exception{
         List<FlowerDTO> dtos = new ArrayList();
-        for(Flower staff :repository.getAllFlowers()){
-            FlowerDTO dto = new FlowerDTO(staff);
-            dtos.add(dto);
+        for(AbsProduct staff :florist.getProducts()){
+            if(staff instanceof Flower){
+                Flower flower = new Flower(staff.getPrice(),((Flower) staff).getColor());
+                FlowerDTO dto = new FlowerDTO(flower);
+                dtos.add(dto);
+            }
+            
         }
         return dtos;
     }
-    public List<DecorationDTO> getAllDecorations() {
+    public List<DecorationDTO> getAllDecorations() throws Exception{
         List<DecorationDTO> dtos = new ArrayList();
-        for(Decoration staff :repository.getAllDecorations()){
-            DecorationDTO dto = new DecorationDTO(staff);
-            dtos.add(dto);
+        for(AbsProduct staff :florist.getProducts()){
+            if(staff instanceof Decoration){
+                Decoration decoration = new Decoration(staff.getPrice(),((Decoration) staff).getTypeMaterial());
+                DecorationDTO dto = new DecorationDTO(decoration);
+                dtos.add(dto);
+            }
+            
         }
         return dtos;
     }

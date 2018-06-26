@@ -16,9 +16,6 @@ public class Tree extends AbsProduct {
     return hight;
   }
 
-  @Override
-  public String toString() {
-    return ("Tree -> ID: "+id + ", PRECIO: " + price + ", ALTURA:" + hight);
-  }
+  
 
 }

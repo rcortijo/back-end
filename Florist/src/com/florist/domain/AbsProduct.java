@@ -26,5 +26,5 @@ public abstract class AbsProduct {
         return COUNTER_PRODUCT;
     }
 
-  public abstract String toString();
+  
 }

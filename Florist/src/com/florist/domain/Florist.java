@@ -18,24 +18,15 @@ public class Florist {
     return name;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
 
   public List<AbsProduct> getProducts() {
     return products;
-  }
-
-  public void setProducts(List<AbsProduct> products) {
-    this.products = products;
   }
 
   public void addProduct(AbsProduct product) {
     products.add(product);
   }
 
-  public List<AbsProduct> listStock() {
-    return products;
-  }
+  
 
 }

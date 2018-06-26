@@ -1,11 +1,12 @@
 package com.florist.application;
 
 import com.florist.domain.Decoration;
+import com.florist.utilities.TypeMaterials;
 
 public class DecorationDTO {
     private int id;
     private double precio;
-    private String tipoMaterial;
+    private TypeMaterials tipoMaterial;
 
     public DecorationDTO(Decoration staff){
         this.id = staff.getId();
@@ -21,7 +22,7 @@ public class DecorationDTO {
         return precio;
     }
 
-    public String getTipoMaterial() {
+    public TypeMaterials getTipoMaterial() {
         return tipoMaterial;
     }
 

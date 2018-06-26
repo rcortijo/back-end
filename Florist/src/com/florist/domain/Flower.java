@@ -15,9 +15,6 @@ public class Flower extends AbsProduct {
     return color;
   }
 
-  @Override
-  public String toString() {
-    return ("Flower -> ID:" + id + ", PRECIO:" + price + ", COLOR:" + color);
-  }
+ 
 
 }

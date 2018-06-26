@@ -1,25 +1,31 @@
 package com.florist.domain;
 
+import com.florist.utilities.TypeMaterials;
+
 public class Decoration extends AbsProduct {
+    
+ 
 
-  protected String typeMaterial;
+  protected TypeMaterials typeMaterial;
 
-  public Decoration(double price, String typeMaterial) throws Exception {
+  public Decoration(double price, TypeMaterials typeMaterial) throws Exception {
 
     super(price);
-    if (typeMaterial == null && (typeMaterial != "PLASTICO" || typeMaterial != "MADERA"))
-      throw new Exception();
+    if (typeMaterial == null) throw new Exception();
+    else if (typeMaterial.equals(TypeMaterials.MADERA)){
+        this.typeMaterial=TypeMaterials.MADERA;
+    }else if (typeMaterial.equals(TypeMaterials.PLASTICO)){
+        this.typeMaterial=TypeMaterials.PLASTICO;
+    }
+    
     this.typeMaterial = typeMaterial;
 
   }
 
-  public String getTypeMaterial() {
+  public TypeMaterials getTypeMaterial() {
     return typeMaterial;
   }
 
-  @Override
-  public String toString() {
-    return ("Decoration -> ID:" + id + ", PRECIO:" + price + ", TIPO DE MATERIAL:" + typeMaterial);
-  }
+  
 
 }
